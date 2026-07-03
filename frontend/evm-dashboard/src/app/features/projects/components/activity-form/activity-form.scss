@@ -19,6 +19,12 @@
   gap: 14px;
 }
 
+.form-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
 button {
   height: 56px;
 }
@@ -26,5 +32,10 @@ button {
 @media (max-width: 760px) {
   .activity-form {
     grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
   }
 }

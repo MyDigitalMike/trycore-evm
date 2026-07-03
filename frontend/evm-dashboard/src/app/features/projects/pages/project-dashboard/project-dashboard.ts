@@ -2,7 +2,7 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 
-import { CreateActivityRequest } from '../../../../core/models/activity.model';
+import { ActivityResponse, CreateActivityRequest } from '../../../../core/models/activity.model';
 import { ProjectEvmResponse } from '../../../../core/models/evm.model';
 import { ProjectResponse } from '../../../../core/models/project.model';
 import { ProjectsApiService } from '../../../../core/services/projects-api.service';
@@ -30,6 +30,7 @@ export class ProjectDashboard implements OnInit {
 
   projects = signal<ProjectResponse[]>([]);
   selectedProjectId = signal<string | null>(null);
+  selectedActivity = signal<ActivityResponse | null>(null);
   report = signal<ProjectEvmResponse | null>(null);
   loading = signal(false);
   error = signal<string | null>(null);
@@ -94,7 +95,7 @@ export class ProjectDashboard implements OnInit {
     });
   }
 
-  addActivity(request: CreateActivityRequest): void {
+  saveActivity(request: CreateActivityRequest): void {
     const projectId = this.selectedProjectId();
 
     if (!projectId) {
@@ -102,12 +103,77 @@ export class ProjectDashboard implements OnInit {
       return;
     }
 
+    const activity = this.selectedActivity();
+
+    if (activity) {
+      this.updateActivity(projectId, activity.id, request);
+      return;
+    }
+
+    this.addActivity(projectId, request);
+  }
+
+  selectActivity(activity: ActivityResponse): void {
+    this.selectedActivity.set(activity);
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  clearSelectedActivity(): void {
+    this.selectedActivity.set(null);
+  }
+
+  deleteActivity(activity: ActivityResponse): void {
+    const projectId = this.selectedProjectId();
+
+    if (!projectId) {
+      this.error.set('There is no selected project.');
+      return;
+    }
+
+    const confirmed = window.confirm(`Delete activity "${activity.name}"?`);
+
+    if (!confirmed) {
+      return;
+    }
+
+    this.projectsApi.deleteActivity(projectId, activity.id).subscribe({
+      next: () => {
+        this.clearSelectedActivity();
+        this.loadReport(projectId);
+      },
+      error: () => {
+        this.error.set('Could not delete activity.');
+      }
+    });
+  }
+
+  private addActivity(projectId: string, request: CreateActivityRequest): void {
     this.projectsApi.addActivity(projectId, request).subscribe({
       next: () => {
         this.loadReport(projectId);
       },
       error: () => {
         this.error.set('Could not create activity. Check input values.');
+      }
+    });
+  }
+
+  private updateActivity(
+    projectId: string,
+    activityId: string,
+    request: CreateActivityRequest
+  ): void {
+    this.projectsApi.updateActivity(projectId, activityId, request).subscribe({
+      next: () => {
+        this.clearSelectedActivity();
+        this.loadReport(projectId);
+      },
+      error: () => {
+        this.error.set('Could not update activity. Check input values.');
       }
     });
   }

@@ -4,50 +4,52 @@
       <span class="eyebrow">Earned Value Management</span>
 
       @if (report()) {
-        <h1>{{ report()!.project.name }}</h1>
-        <p>{{ report()!.project.description }}</p>
+      <h1>{{ report()!.project.name }}</h1>
+      <p>{{ report()!.project.description }}</p>
       } @else {
-        <h1>Internal EVM Dashboard</h1>
-        <p>Loading project information...</p>
+      <h1>Internal EVM Dashboard</h1>
+      <p>Loading project information...</p>
       }
     </div>
 
     @if (report()) {
-      <div class="hero-status">
-        <strong>Project health</strong>
-        <span>{{ report()!.summary.costStatus }} · {{ report()!.summary.scheduleStatus }}</span>
-      </div>
+    <div class="hero-status">
+      <strong>Project health</strong>
+      <span>{{ report()!.summary.costStatus }} · {{ report()!.summary.scheduleStatus }}</span>
+    </div>
     }
   </header>
 
   @if (error()) {
-    <section class="error-box">
-      {{ error() }}
-    </section>
+  <section class="error-box">
+    {{ error() }}
+  </section>
   }
 
   @if (loading()) {
-    <section class="loading-box">
-      Loading dashboard data...
-    </section>
+  <section class="loading-box">
+    Loading dashboard data...
+  </section>
   }
 
   @if (report()) {
-    <app-evm-summary-cards [summary]="report()!.summary" />
+  <app-evm-summary-cards [summary]="report()!.summary" />
 
-    <section class="form-section">
-      <app-activity-form (activityCreated)="addActivity($event)" />
-    </section>
+  <section class="form-section">
+    <app-activity-form [activityToEdit]="selectedActivity()" (activitySaved)="saveActivity($event)"
+      (editCancelled)="clearSelectedActivity()" />
+  </section>
 
-    <section class="content-grid">
-      <div class="main-panel">
-        <h2>Activities</h2>
-        <p>Activity-level progress, cost and schedule indicators.</p>
+  <section class="content-grid">
+    <div class="main-panel">
+      <h2>Activities</h2>
+      <p>Activity-level progress, cost and schedule indicators.</p>
 
-        <app-activity-table [activities]="report()!.activities" />
-      </div>
+      <app-activity-table [activities]="report()!.activities" (editRequested)="selectActivity($event)"
+        (deleteRequested)="deleteActivity($event)" />
+    </div>
 
-      <app-evm-chart [activities]="report()!.activities" />
-    </section>
+    <app-evm-chart [activities]="report()!.activities" />
+  </section>
   }
 </main>
