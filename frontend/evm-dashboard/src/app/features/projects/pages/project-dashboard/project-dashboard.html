@@ -2,26 +2,52 @@
   <header class="hero">
     <div>
       <span class="eyebrow">Earned Value Management</span>
-      <h1>{{ report().project.name }}</h1>
-      <p>{{ report().project.description }}</p>
+
+      @if (report()) {
+        <h1>{{ report()!.project.name }}</h1>
+        <p>{{ report()!.project.description }}</p>
+      } @else {
+        <h1>Internal EVM Dashboard</h1>
+        <p>Loading project information...</p>
+      }
     </div>
 
-    <div class="hero-status">
-      <strong>Project health</strong>
-      <span>{{ report().summary.costStatus }} · {{ report().summary.scheduleStatus }}</span>
-    </div>
+    @if (report()) {
+      <div class="hero-status">
+        <strong>Project health</strong>
+        <span>{{ report()!.summary.costStatus }} · {{ report()!.summary.scheduleStatus }}</span>
+      </div>
+    }
   </header>
 
-  <app-evm-summary-cards [summary]="report().summary" />
+  @if (error()) {
+    <section class="error-box">
+      {{ error() }}
+    </section>
+  }
 
-  <section class="content-grid">
-    <div class="main-panel">
-      <h2>Activities</h2>
-      <p>Activity-level progress, cost and schedule indicators.</p>
+  @if (loading()) {
+    <section class="loading-box">
+      Loading dashboard data...
+    </section>
+  }
 
-      <app-activity-table [activities]="report().activities" />
-    </div>
+  @if (report()) {
+    <app-evm-summary-cards [summary]="report()!.summary" />
 
-    <app-evm-chart [activities]="report().activities" />
-  </section>
+    <section class="form-section">
+      <app-activity-form (activityCreated)="addActivity($event)" />
+    </section>
+
+    <section class="content-grid">
+      <div class="main-panel">
+        <h2>Activities</h2>
+        <p>Activity-level progress, cost and schedule indicators.</p>
+
+        <app-activity-table [activities]="report()!.activities" />
+      </div>
+
+      <app-evm-chart [activities]="report()!.activities" />
+    </section>
+  }
 </main>

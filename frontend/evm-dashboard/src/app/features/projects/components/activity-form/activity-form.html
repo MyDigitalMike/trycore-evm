@@ -1,1 +1,35 @@
-<p>activity-form works!</p>
+<mat-card class="form-card">
+  <h2>Add activity</h2>
+  <p>Register activity progress and actual cost to calculate EVM indicators.</p>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="activity-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Activity name</mat-label>
+      <input matInput formControlName="name" placeholder="Backend API" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>BAC</mat-label>
+      <input matInput type="number" formControlName="bac" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Planned progress %</mat-label>
+      <input matInput type="number" formControlName="plannedProgressPercent" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Actual progress %</mat-label>
+      <input matInput type="number" formControlName="actualProgressPercent" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Actual cost</mat-label>
+      <input matInput type="number" formControlName="actualCost" />
+    </mat-form-field>
+
+    <button mat-flat-button color="primary" type="submit">
+      Add activity
+    </button>
+  </form>
+</mat-card>

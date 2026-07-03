@@ -87,7 +87,27 @@
     flex-direction: column;
   }
 }
+.form-section {
+  margin-top: 20px;
+}
 
+.error-box {
+  margin-bottom: 20px;
+  padding: 16px;
+  border-radius: 14px;
+  color: #991b1b;
+  background: #fee2e2;
+  font-weight: 600;
+}
+
+.loading-box {
+  margin-bottom: 20px;
+  padding: 16px;
+  border-radius: 14px;
+  color: #334155;
+  background: #e2e8f0;
+  font-weight: 600;
+}
 @media (max-width: 640px) {
   .dashboard-page {
     padding: 16px;

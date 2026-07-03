@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   Component,
+  effect,
   ElementRef,
   input,
   OnDestroy,
@@ -9,13 +10,11 @@ import {
 import { Chart } from 'chart.js/auto';
 import { ActivityEvmResponse } from '../../../../core/models/evm.model';
 
-
 @Component({
   selector: 'app-evm-chart',
   standalone: true,
-  imports: [],
   templateUrl: './evm-chart.html',
-  styleUrl: './evm-chart.scss',
+  styleUrl: './evm-chart.scss'
 })
 export class EvmChart implements AfterViewInit, OnDestroy {
   activities = input.required<ActivityEvmResponse[]>();
@@ -24,8 +23,20 @@ export class EvmChart implements AfterViewInit, OnDestroy {
   chartCanvas?: ElementRef<HTMLCanvasElement>;
 
   private chart?: Chart;
+  private viewReady = false;
+
+  constructor() {
+    effect(() => {
+      this.activities();
+
+      if (this.viewReady) {
+        this.renderChart();
+      }
+    });
+  }
 
   ngAfterViewInit(): void {
+    this.viewReady = true;
     this.renderChart();
   }
 
@@ -37,6 +48,8 @@ export class EvmChart implements AfterViewInit, OnDestroy {
     if (!this.chartCanvas) {
       return;
     }
+
+    this.chart?.destroy();
 
     const labels = this.activities().map(item => item.activity.name);
 
