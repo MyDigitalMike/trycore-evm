@@ -1,3 +1,4 @@
+using Trycore.Evm.Domain.Constants;
 using Trycore.Evm.Domain.Entities;
 using Trycore.Evm.Domain.ValueObjects;
 
@@ -8,6 +9,7 @@ public class EvmCalculator
     public EvmMetrics CalculateActivity(ProjectActivity activity)
     {
         ArgumentNullException.ThrowIfNull(activity);
+        ValidateActivity(activity);
 
         var pv = CalculatePercentageValue(activity.PlannedProgressPercent, activity.Bac);
         var ev = CalculatePercentageValue(activity.ActualProgressPercent, activity.Bac);
@@ -33,7 +35,7 @@ public class EvmCalculator
                 pv: 0m,
                 ev: 0m,
                 ac: 0m,
-                emptyStatus: "No activities registered"
+                emptyStatus: EvmStatusMessages.NoActivitiesRegistered
             );
         }
 
@@ -53,6 +55,42 @@ public class EvmCalculator
             ac: totalAc,
             emptyStatus: null
         );
+    }
+
+    private static void ValidateActivity(ProjectActivity activity)
+    {
+        if (activity.Bac < 0)
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(activity.Bac),
+                activity.Bac,
+                "BAC cannot be negative."
+            );
+        }
+
+        if (activity.ActualCost < 0)
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(activity.ActualCost),
+                activity.ActualCost,
+                "Actual cost cannot be negative."
+            );
+        }
+
+        ValidatePercentage(activity.PlannedProgressPercent, nameof(activity.PlannedProgressPercent));
+        ValidatePercentage(activity.ActualProgressPercent, nameof(activity.ActualProgressPercent));
+    }
+
+    private static void ValidatePercentage(decimal percentage, string parameterName)
+    {
+        if (percentage < 0 || percentage > 100)
+        {
+            throw new ArgumentOutOfRangeException(
+                parameterName,
+                percentage,
+                "Percentage must be between 0 and 100."
+            );
+        }
     }
 
     private static EvmMetrics BuildMetrics(
@@ -96,29 +134,29 @@ public class EvmCalculator
     private static string GetCostStatus(decimal? cpi)
     {
         if (cpi is null)
-            return "No actual cost registered";
+            return EvmStatusMessages.NoActualCostRegistered;
 
         if (cpi > 1)
-            return "Under budget";
+            return EvmStatusMessages.UnderBudget;
 
         if (cpi < 1)
-            return "Over budget";
+            return EvmStatusMessages.OverBudget;
 
-        return "On budget";
+        return EvmStatusMessages.OnBudget;
     }
 
     private static string GetScheduleStatus(decimal? spi)
     {
         if (spi is null)
-            return "No planned value registered";
+            return EvmStatusMessages.NoPlannedValueRegistered;
 
         if (spi > 1)
-            return "Ahead of schedule";
+            return EvmStatusMessages.AheadOfSchedule;
 
         if (spi < 1)
-            return "Behind schedule";
+            return EvmStatusMessages.BehindSchedule;
 
-        return "On schedule";
+        return EvmStatusMessages.OnSchedule;
     }
 
     private static decimal Round(decimal value)

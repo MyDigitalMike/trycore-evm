@@ -1,6 +1,6 @@
 using Trycore.Evm.Domain.Entities;
 using Trycore.Evm.Domain.Services;
-
+using Trycore.Evm.Domain.Constants;
 namespace Trycore.Evm.Tests.Unit.Domain;
 
 public class EvmCalculatorTests
@@ -34,8 +34,8 @@ public class EvmCalculatorTests
         Assert.Equal(0.8m, result.Spi);
         Assert.Equal(1250m, result.Eac);
         Assert.Equal(-250m, result.Vac);
-        Assert.Equal("Over budget", result.CostStatus);
-        Assert.Equal("Behind schedule", result.ScheduleStatus);
+        Assert.Equal(EvmStatusMessages.OverBudget, result.CostStatus);
+        Assert.Equal(EvmStatusMessages.BehindSchedule, result.ScheduleStatus);
     }
     [Fact]
     public void CalculateActivity_ShouldReturnNullCpiAndEac_WhenActualCostIsZero()
@@ -59,7 +59,7 @@ public class EvmCalculatorTests
         Assert.Null(result.Cpi);
         Assert.Null(result.Eac);
         Assert.Null(result.Vac);
-        Assert.Equal("No actual cost registered", result.CostStatus);
+        Assert.Equal(EvmStatusMessages.NoActualCostRegistered, result.CostStatus);
     }
 
     [Fact]
@@ -81,7 +81,7 @@ public class EvmCalculatorTests
         Assert.Equal(0m, result.Pv);
         Assert.Equal(200m, result.Ev);
         Assert.Null(result.Spi);
-        Assert.Equal("No planned value registered", result.ScheduleStatus);
+        Assert.Equal(EvmStatusMessages.NoPlannedValueRegistered, result.ScheduleStatus);
     }
 
     [Fact]
@@ -108,8 +108,8 @@ public class EvmCalculatorTests
         Assert.Equal(0m, result.Spi);
         Assert.Null(result.Eac);
         Assert.Null(result.Vac);
-        Assert.Equal("Over budget", result.CostStatus);
-        Assert.Equal("Behind schedule", result.ScheduleStatus);
+        Assert.Equal(EvmStatusMessages.OverBudget, result.CostStatus);
+        Assert.Equal(EvmStatusMessages.BehindSchedule, result.ScheduleStatus);
     }
 
     [Fact]
@@ -171,8 +171,8 @@ public class EvmCalculatorTests
         Assert.Equal(1.43m, result.Spi);
         Assert.Equal(3200m, result.Eac);
         Assert.Equal(800m, result.Vac);
-        Assert.Equal("Under budget", result.CostStatus);
-        Assert.Equal("Ahead of schedule", result.ScheduleStatus);
+        Assert.Equal(EvmStatusMessages.UnderBudget, result.CostStatus);
+        Assert.Equal(EvmStatusMessages.AheadOfSchedule, result.ScheduleStatus);
     }
 
     [Fact]
@@ -200,13 +200,89 @@ public class EvmCalculatorTests
         Assert.Null(result.Spi);
         Assert.Null(result.Eac);
         Assert.Null(result.Vac);
-        Assert.Equal("No activities registered", result.CostStatus);
-        Assert.Equal("No activities registered", result.ScheduleStatus);
+        Assert.Equal(EvmStatusMessages.NoActivitiesRegistered, result.CostStatus);
+        Assert.Equal(EvmStatusMessages.NoActivitiesRegistered, result.ScheduleStatus);
     }
 
     [Fact]
     public void CalculateProject_ShouldThrowException_WhenProjectIsNull()
     {
         Assert.Throws<ArgumentNullException>(() => _calculator.CalculateProject(null!));
+    }
+
+    [Theory]
+    [InlineData(-1)]
+    [InlineData(-100)]
+    public void CalculateActivity_ShouldThrowException_WhenBacIsNegative(decimal bac)
+    {
+        var activity = new ProjectActivity
+        {
+            Id = Guid.NewGuid(),
+            ProjectId = Guid.NewGuid(),
+            Name = "Invalid BAC activity",
+            Bac = bac,
+            PlannedProgressPercent = 50m,
+            ActualProgressPercent = 40m,
+            ActualCost = 500m
+        };
+
+        Assert.Throws<ArgumentOutOfRangeException>(() => _calculator.CalculateActivity(activity));
+    }
+
+    [Theory]
+    [InlineData(-1)]
+    [InlineData(-500)]
+    public void CalculateActivity_ShouldThrowException_WhenActualCostIsNegative(decimal actualCost)
+    {
+        var activity = new ProjectActivity
+        {
+            Id = Guid.NewGuid(),
+            ProjectId = Guid.NewGuid(),
+            Name = "Invalid AC activity",
+            Bac = 1000m,
+            PlannedProgressPercent = 50m,
+            ActualProgressPercent = 40m,
+            ActualCost = actualCost
+        };
+
+        Assert.Throws<ArgumentOutOfRangeException>(() => _calculator.CalculateActivity(activity));
+    }
+
+    [Theory]
+    [InlineData(-1)]
+    [InlineData(101)]
+    public void CalculateActivity_ShouldThrowException_WhenPlannedProgressPercentIsOutOfRange(decimal plannedProgressPercent)
+    {
+        var activity = new ProjectActivity
+        {
+            Id = Guid.NewGuid(),
+            ProjectId = Guid.NewGuid(),
+            Name = "Invalid planned progress activity",
+            Bac = 1000m,
+            PlannedProgressPercent = plannedProgressPercent,
+            ActualProgressPercent = 40m,
+            ActualCost = 500m
+        };
+
+        Assert.Throws<ArgumentOutOfRangeException>(() => _calculator.CalculateActivity(activity));
+    }
+
+    [Theory]
+    [InlineData(-1)]
+    [InlineData(101)]
+    public void CalculateActivity_ShouldThrowException_WhenActualProgressPercentIsOutOfRange(decimal actualProgressPercent)
+    {
+        var activity = new ProjectActivity
+        {
+            Id = Guid.NewGuid(),
+            ProjectId = Guid.NewGuid(),
+            Name = "Invalid actual progress activity",
+            Bac = 1000m,
+            PlannedProgressPercent = 50m,
+            ActualProgressPercent = actualProgressPercent,
+            ActualCost = 500m
+        };
+
+        Assert.Throws<ArgumentOutOfRangeException>(() => _calculator.CalculateActivity(activity));
     }
 }
