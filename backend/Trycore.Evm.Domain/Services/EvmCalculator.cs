@@ -13,18 +13,67 @@ public class EvmCalculator
         var ev = CalculatePercentageValue(activity.ActualProgressPercent, activity.Bac);
         var ac = activity.ActualCost;
 
+        return BuildMetrics(
+            bac: activity.Bac,
+            pv: pv,
+            ev: ev,
+            ac: ac,
+            emptyStatus: null
+        );
+    }
+
+    public EvmMetrics CalculateProject(Project project)
+    {
+        ArgumentNullException.ThrowIfNull(project);
+
+        if (project.Activities.Count == 0)
+        {
+            return BuildMetrics(
+                bac: 0m,
+                pv: 0m,
+                ev: 0m,
+                ac: 0m,
+                emptyStatus: "No activities registered"
+            );
+        }
+
+        var activityMetrics = project.Activities
+            .Select(CalculateActivity)
+            .ToList();
+
+        var totalBac = activityMetrics.Sum(x => x.Bac);
+        var totalPv = activityMetrics.Sum(x => x.Pv);
+        var totalEv = activityMetrics.Sum(x => x.Ev);
+        var totalAc = activityMetrics.Sum(x => x.Ac);
+
+        return BuildMetrics(
+            bac: totalBac,
+            pv: totalPv,
+            ev: totalEv,
+            ac: totalAc,
+            emptyStatus: null
+        );
+    }
+
+    private static EvmMetrics BuildMetrics(
+        decimal bac,
+        decimal pv,
+        decimal ev,
+        decimal ac,
+        string? emptyStatus)
+    {
         var cv = ev - ac;
         var sv = ev - pv;
 
-        var cpi = ac == 0 ? (decimal?)null : ev / ac;
-        var spi = pv == 0 ? (decimal?)null : ev / pv;
+        decimal? cpi = ac == 0 ? null : ev / ac;
+        decimal? spi = pv == 0 ? null : ev / pv;
 
-        var eac = cpi is null or 0 ? null : activity.Bac / cpi;
-        var vac = eac is null ? null : activity.Bac - eac;
+        var eac = cpi is null or 0 ? null : bac / cpi;
+        var vac = eac is null ? null : bac - eac;
 
         return new EvmMetrics
         {
-            Bac = activity.Bac,
+            Bac = Round(bac),
             Pv = Round(pv),
             Ev = Round(ev),
             Ac = Round(ac),
@@ -34,8 +83,8 @@ public class EvmCalculator
             Spi = RoundNullable(spi),
             Eac = RoundNullable(eac),
             Vac = RoundNullable(vac),
-            CostStatus = GetCostStatus(cpi),
-            ScheduleStatus = GetScheduleStatus(spi)
+            CostStatus = emptyStatus ?? GetCostStatus(cpi),
+            ScheduleStatus = emptyStatus ?? GetScheduleStatus(spi)
         };
     }
 
