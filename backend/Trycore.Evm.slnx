@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="Trycore.Evm.Api/Trycore.Evm.Api.csproj" />
+  <Project Path="Trycore.Evm.Application/Trycore.Evm.Application.csproj" />
+  <Project Path="Trycore.Evm.Domain/Trycore.Evm.Domain.csproj" />
+  <Project Path="Trycore.Evm.Infrastructure/Trycore.Evm.Infrastructure.csproj" />
+  <Project Path="Trycore.Evm.Tests.Integration/Trycore.Evm.Tests.Integration.csproj" />
+  <Project Path="Trycore.Evm.Tests.Unit/Trycore.Evm.Tests.Unit.csproj" />
+</Solution>
