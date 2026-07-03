@@ -1,0 +1,41 @@
+.form-card {
+  padding: 20px;
+  border-radius: 18px;
+}
+
+.form-card h2 {
+  margin: 0;
+  color: #0f172a;
+}
+
+.form-card p {
+  margin: 6px 0 18px;
+  color: #64748b;
+}
+
+.activity-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(180px, 1fr));
+  gap: 14px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+button {
+  height: 56px;
+}
+
+@media (max-width: 760px) {
+  .activity-form {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

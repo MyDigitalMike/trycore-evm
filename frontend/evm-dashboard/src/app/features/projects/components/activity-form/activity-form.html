@@ -1,0 +1,48 @@
+<mat-card class="form-card">
+  <h2>{{ activityToEdit() ? 'Edit activity' : 'Add activity' }}</h2>
+
+  <p>
+    {{ activityToEdit()
+      ? 'Update activity progress and actual cost.'
+      : 'Register activity progress and actual cost to calculate EVM indicators.' }}
+  </p>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="activity-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Activity name</mat-label>
+      <input matInput formControlName="name" placeholder="Backend API" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>BAC</mat-label>
+      <input matInput type="number" formControlName="bac" placeholder="1000" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Planned progress %</mat-label>
+      <input matInput type="number" formControlName="plannedProgressPercent" placeholder="50" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Actual progress %</mat-label>
+      <input matInput type="number" formControlName="actualProgressPercent" placeholder="40" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Actual cost</mat-label>
+      <input matInput type="number" formControlName="actualCost" placeholder="500" />
+    </mat-form-field>
+
+    <div class="form-actions">
+      <button mat-flat-button color="primary" type="submit">
+        {{ activityToEdit() ? 'Update activity' : 'Add activity' }}
+      </button>
+
+      @if (activityToEdit()) {
+        <button mat-stroked-button type="button" (click)="cancelEdit()">
+          Cancel
+        </button>
+      }
+    </div>
+  </form>
+</mat-card>

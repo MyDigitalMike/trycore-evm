@@ -1,0 +1,27 @@
+.metric-card {
+  padding: 18px;
+  border-radius: 18px;
+  min-height: 120px;
+}
+
+.metric-title {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.metric-value {
+  display: block;
+  margin-top: 10px;
+  font-size: 28px;
+  color: #0f172a;
+}
+
+.metric-subtitle {
+  display: block;
+  margin-top: 8px;
+  font-size: 13px;
+  color: #64748b;
+}

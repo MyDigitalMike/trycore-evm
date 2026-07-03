@@ -1,0 +1,23 @@
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 18px;
+  background: white;
+}
+
+.activity-table {
+  width: 100%;
+}
+
+th {
+  font-weight: 700;
+  color: #334155;
+}
+
+td {
+  color: #0f172a;
+}
+.actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}

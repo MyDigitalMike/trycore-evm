@@ -1,0 +1,20 @@
+<section class="summary-grid">
+  <app-metric-card title="BAC" [value]="formatCurrency(summary().bac)" subtitle="Budget at completion" />
+  <app-metric-card title="PV" [value]="formatCurrency(summary().pv)" subtitle="Planned value" />
+  <app-metric-card title="EV" [value]="formatCurrency(summary().ev)" subtitle="Earned value" />
+  <app-metric-card title="AC" [value]="formatCurrency(summary().ac)" subtitle="Actual cost" />
+  <app-metric-card title="CV" [value]="formatCurrency(summary().cv)" subtitle="Cost variance" />
+  <app-metric-card title="SV" [value]="formatCurrency(summary().sv)" subtitle="Schedule variance" />
+
+  <div class="status-card">
+    <span>CPI</span>
+    <strong>{{ formatIndex(summary().cpi) }}</strong>
+    <app-status-badge [status]="summary().costStatus" />
+  </div>
+
+  <div class="status-card">
+    <span>SPI</span>
+    <strong>{{ formatIndex(summary().spi) }}</strong>
+    <app-status-badge [status]="summary().scheduleStatus" />
+  </div>
+</section>
