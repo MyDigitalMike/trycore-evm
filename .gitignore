@@ -234,3 +234,8 @@ pgdata/
 # Temporary files
 *.tmp
 *.temp
+
+TestResults/
+coverage-report/
+coverage/
+coverage.cobertura.xml
