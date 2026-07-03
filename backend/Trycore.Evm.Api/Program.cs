@@ -5,7 +5,11 @@ using Trycore.Evm.Infrastructure;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddApplication();
-builder.Services.AddInfrastructure(builder.Configuration);
+
+if (!builder.Environment.IsEnvironment("Testing"))
+{
+    builder.Services.AddInfrastructure(builder.Configuration);
+}
 
 builder.Services.AddControllers();
 

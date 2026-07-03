@@ -163,3 +163,74 @@ docker-compose.*.override.yml
 *.swp
 *~# Auto detect text files and perform LF normalization
 * text=auto
+# Build results
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+
+# .NET
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+TestResults/
+*.trx
+coverage/
+coverage.cobertura.xml
+
+# Visual Studio
+.vs/
+
+# VS Code
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Rider / JetBrains
+.idea/
+
+# NuGet
+*.nupkg
+.nuget/
+packages/
+
+# Logs
+*.log
+logs/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Angular / Node
+node_modules/
+dist/
+.angular/
+.cache/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Angular test coverage
+frontend/**/coverage/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Docker local volumes
+postgres_data/
+pgdata/
+
+# Temporary files
+*.tmp
+*.temp
