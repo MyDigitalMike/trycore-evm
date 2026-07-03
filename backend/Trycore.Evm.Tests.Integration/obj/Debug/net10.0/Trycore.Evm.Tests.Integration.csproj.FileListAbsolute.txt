@@ -227,3 +227,8 @@ E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Tests.Integration\obj\Debug\net10
 E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Tests.Integration\obj\Debug\net10.0\Trycore.Evm.Tests.Integration.pdb
 E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Tests.Integration\obj\Debug\net10.0\Trycore.Evm.Tests.Integration.genruntimeconfig.cache
 E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Tests.Integration\obj\Debug\net10.0\ref\Trycore.Evm.Tests.Integration.dll
+E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Tests.Integration\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.dll
+E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Tests.Integration\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Tests.Integration\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Relational.dll
+E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Tests.Integration\bin\Debug\net10.0\Npgsql.dll
+E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Tests.Integration\bin\Debug\net10.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll

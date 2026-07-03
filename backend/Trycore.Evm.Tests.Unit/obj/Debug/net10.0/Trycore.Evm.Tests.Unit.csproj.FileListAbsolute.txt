@@ -203,3 +203,4 @@ E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Tests.Unit\obj\Debug\net10.0\refi
 E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Tests.Unit\obj\Debug\net10.0\Trycore.Evm.Tests.Unit.pdb
 E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Tests.Unit\obj\Debug\net10.0\Trycore.Evm.Tests.Unit.genruntimeconfig.cache
 E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Tests.Unit\obj\Debug\net10.0\ref\Trycore.Evm.Tests.Unit.dll
+E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Tests.Unit\bin\Debug\net10.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
