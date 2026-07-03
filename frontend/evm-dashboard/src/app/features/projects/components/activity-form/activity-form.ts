@@ -28,12 +28,12 @@ export class ActivityForm {
 
   private readonly formBuilder = new FormBuilder();
 
-  form = this.formBuilder.nonNullable.group({
+  form = this.formBuilder.group({
     name: ['', [Validators.required, Validators.maxLength(150)]],
-    bac: [0, [Validators.required, Validators.min(0)]],
-    plannedProgressPercent: [0, [Validators.required, Validators.min(0), Validators.max(100)]],
-    actualProgressPercent: [0, [Validators.required, Validators.min(0), Validators.max(100)]],
-    actualCost: [0, [Validators.required, Validators.min(0)]]
+    bac: [null as number | null, [Validators.required, Validators.min(0)]],
+    plannedProgressPercent: [null as number | null, [Validators.required, Validators.min(0), Validators.max(100)]],
+    actualProgressPercent: [null as number | null, [Validators.required, Validators.min(0), Validators.max(100)]],
+    actualCost: [null as number | null, [Validators.required, Validators.min(0)]]
   });
 
   constructor() {
@@ -41,6 +41,7 @@ export class ActivityForm {
       const activity = this.activityToEdit();
 
       if (!activity) {
+        this.resetForm();
         return;
       }
 
@@ -60,7 +61,17 @@ export class ActivityForm {
       return;
     }
 
-    this.activitySaved.emit(this.form.getRawValue());
+    const formValue = this.form.getRawValue();
+
+    const request: CreateActivityRequest = {
+      name: formValue.name?.trim() ?? '',
+      bac: Number(formValue.bac),
+      plannedProgressPercent: Number(formValue.plannedProgressPercent),
+      actualProgressPercent: Number(formValue.actualProgressPercent),
+      actualCost: Number(formValue.actualCost)
+    };
+
+    this.activitySaved.emit(request);
 
     if (!this.activityToEdit()) {
       this.resetForm();
@@ -75,10 +86,10 @@ export class ActivityForm {
   private resetForm(): void {
     this.form.reset({
       name: '',
-      bac: 0,
-      plannedProgressPercent: 0,
-      actualProgressPercent: 0,
-      actualCost: 0
+      bac: null,
+      plannedProgressPercent: null,
+      actualProgressPercent: null,
+      actualCost: null
     });
   }
 }
