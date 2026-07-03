@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Trycore.Evm.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2a82f1ced3c962f318e886c9c856c36dda3d4bdd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+290a823a48a521de4c386465a1055e19eaa31d8d")]
 [assembly: System.Reflection.AssemblyProductAttribute("Trycore.Evm.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Trycore.Evm.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
