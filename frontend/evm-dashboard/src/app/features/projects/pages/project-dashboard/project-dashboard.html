@@ -1,1 +1,27 @@
-<p>project-dashboard works!</p>
+<main class="dashboard-page">
+  <header class="hero">
+    <div>
+      <span class="eyebrow">Earned Value Management</span>
+      <h1>{{ report().project.name }}</h1>
+      <p>{{ report().project.description }}</p>
+    </div>
+
+    <div class="hero-status">
+      <strong>Project health</strong>
+      <span>{{ report().summary.costStatus }} · {{ report().summary.scheduleStatus }}</span>
+    </div>
+  </header>
+
+  <app-evm-summary-cards [summary]="report().summary" />
+
+  <section class="content-grid">
+    <div class="main-panel">
+      <h2>Activities</h2>
+      <p>Activity-level progress, cost and schedule indicators.</p>
+
+      <app-activity-table [activities]="report().activities" />
+    </div>
+
+    <app-evm-chart [activities]="report().activities" />
+  </section>
+</main>
