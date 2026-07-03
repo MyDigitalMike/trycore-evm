@@ -13,10 +13,12 @@ public class ProjectService : IProjectService
     private readonly IProjectRepository _projectRepository;
     private readonly EvmCalculator _evmCalculator;
 
-    public ProjectService(IProjectRepository projectRepository)
+    public ProjectService(
+        IProjectRepository projectRepository,
+        EvmCalculator evmCalculator)
     {
         _projectRepository = projectRepository;
-        _evmCalculator = new EvmCalculator();
+        _evmCalculator = evmCalculator;
     }
 
     public async Task<List<ProjectResponse>> GetAllAsync()

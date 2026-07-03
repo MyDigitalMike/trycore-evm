@@ -33,3 +33,5 @@ E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Infrastructure\obj\Debug\net10.0\
 E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Infrastructure\obj\Debug\net10.0\refint\Trycore.Evm.Infrastructure.dll
 E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Infrastructure\obj\Debug\net10.0\Trycore.Evm.Infrastructure.pdb
 E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Infrastructure\obj\Debug\net10.0\ref\Trycore.Evm.Infrastructure.dll
+E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Infrastructure\bin\Debug\net10.0\Trycore.Evm.Infrastructure.runtimeconfig.json
+E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Infrastructure\obj\Debug\net10.0\Trycore.Evm.Infrastructure.genruntimeconfig.cache
