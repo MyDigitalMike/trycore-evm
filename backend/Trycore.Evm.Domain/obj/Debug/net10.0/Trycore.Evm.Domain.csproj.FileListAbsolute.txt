@@ -1,0 +1,11 @@
+E:\trycore-evm\backend\Trycore.Evm.Domain\bin\Debug\net10.0\Trycore.Evm.Domain.deps.json
+E:\trycore-evm\backend\Trycore.Evm.Domain\bin\Debug\net10.0\Trycore.Evm.Domain.dll
+E:\trycore-evm\backend\Trycore.Evm.Domain\bin\Debug\net10.0\Trycore.Evm.Domain.pdb
+E:\trycore-evm\backend\Trycore.Evm.Domain\obj\Debug\net10.0\Trycore.Evm.Domain.GeneratedMSBuildEditorConfig.editorconfig
+E:\trycore-evm\backend\Trycore.Evm.Domain\obj\Debug\net10.0\Trycore.Evm.Domain.AssemblyInfoInputs.cache
+E:\trycore-evm\backend\Trycore.Evm.Domain\obj\Debug\net10.0\Trycore.Evm.Domain.AssemblyInfo.cs
+E:\trycore-evm\backend\Trycore.Evm.Domain\obj\Debug\net10.0\Trycore.Evm.Domain.csproj.CoreCompileInputs.cache
+E:\trycore-evm\backend\Trycore.Evm.Domain\obj\Debug\net10.0\Trycore.Evm.Domain.dll
+E:\trycore-evm\backend\Trycore.Evm.Domain\obj\Debug\net10.0\refint\Trycore.Evm.Domain.dll
+E:\trycore-evm\backend\Trycore.Evm.Domain\obj\Debug\net10.0\Trycore.Evm.Domain.pdb
+E:\trycore-evm\backend\Trycore.Evm.Domain\obj\Debug\net10.0\ref\Trycore.Evm.Domain.dll
