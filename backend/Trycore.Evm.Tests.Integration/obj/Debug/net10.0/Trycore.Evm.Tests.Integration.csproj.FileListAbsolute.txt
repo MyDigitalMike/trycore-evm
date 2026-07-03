@@ -232,3 +232,7 @@ E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Tests.Integration\bin\Debug\net10
 E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Tests.Integration\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Relational.dll
 E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Tests.Integration\bin\Debug\net10.0\Npgsql.dll
 E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Tests.Integration\bin\Debug\net10.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Tests.Integration\bin\Debug\net10.0\Swashbuckle.AspNetCore.Swagger.dll
+E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Tests.Integration\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Tests.Integration\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Tests.Integration\bin\Debug\net10.0\Trycore.Evm.Api.xml

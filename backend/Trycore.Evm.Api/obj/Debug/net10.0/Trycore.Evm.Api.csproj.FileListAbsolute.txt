@@ -166,3 +166,8 @@ E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Api\bin\Debug\net10.0\ru\Microsof
 E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Api\bin\Debug\net10.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
 E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Api\bin\Debug\net10.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
 E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Api\bin\Debug\net10.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Api\bin\Debug\net10.0\Swashbuckle.AspNetCore.Swagger.dll
+E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Api\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Api\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Api\bin\Debug\net10.0\Trycore.Evm.Api.xml
+E:\trycore-evm\trycore-evm\backend\Trycore.Evm.Api\obj\Debug\net10.0\Trycore.Evm.Api.xml
